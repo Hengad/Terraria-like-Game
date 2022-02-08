@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "11b42504-34fb-49fc-a63b-f180cc65286b": {
+      "ProjectGuid": "11b42504-34fb-49fc-a63b-f180cc65286b",
+      "DisplayName": "2D Game Project",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

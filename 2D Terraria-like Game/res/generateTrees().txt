@@ -1,0 +1,160 @@
+
+void World::generateTrees(int count)
+{
+	std::mt19937 rng;
+	rng.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937::result_type> blockPosX(0, chunkSize.x-1);
+	std::uniform_int_distribution<std::mt19937::result_type> blockPosY(0, chunkSize.y-1);
+	std::uniform_int_distribution<std::mt19937::result_type> chunkPos(0, worldSize-1);
+
+	int **leafHeightMap;
+	leafHeightMap = new int*[worldSize * chunkSize.x];
+	for (int i = 0; i < worldSize * chunkSize.x; i++)
+		leafHeightMap[i] = new int[worldSize * chunkSize.y];
+	
+	for (int j = 0; j < worldSize * chunkSize.y; j++)
+	{
+		for (int i = 0; i < worldSize * chunkSize.x; i++)
+		{
+			leafHeightMap[i][j] = 0;
+		}
+	}
+
+	int moves[8][2] = { { -1,0 },{ -1, -1 },{ 0, -1 },{ 1, -1 },{ 1, 0 },{ 1, 1 },{ 0, 1 },{ -1, 1 } };
+
+	int treesNotGenerated = 0;
+	int range = 5;
+
+	for (int i = 0; i < count; i++)
+	{
+		int cX = chunkPos(rng);
+		int cY = chunkPos(rng);
+		int x = blockPosX(rng);
+		int y = blockPosY(rng);
+
+		bool foundTree = false;
+
+		if (chunks[cX][cY]->blocks[x][y][0]->blockType == BlockType::GRASS)
+		{
+			/*
+			for (int i = 0; i < range; i++)
+			{
+				for (int j = 0; j < range; j++)
+				{
+					for (int l = 0; l < 8; ++l)
+					{
+						int ti = i + moves[l][0];
+						int tj = j + moves[l][1];
+						if (ti < 0 || ti >= range || tj < 0 || tj >= range)
+							continue;
+						// cell (ti, tj) is valid neighbor do something with it.
+						int fuckX = cX*chunkSize.x + (x + ti);
+						int fuckY = cY*chunkSize.y + (y + tj);
+						if (fuckX >= 0 && fuckX < worldSize*chunkSize.x && fuckY >= 0 && fuckY < worldSize*chunkSize.y)
+							if (leafHeightMap[cX*chunkSize.x + (x + ti)][cY*chunkSize.y + (y + tj)] == 1)
+								foundTree = true;
+					}
+				}
+			}*/
+
+			for (int i = -range; i <= range; i++)
+			{
+				for (int j = -range; j <= range; j++)
+				{
+					int fuckX = cX*chunkSize.x + (x + i);
+					int fuckY = cY*chunkSize.y + (y + j);
+					if (fuckX >= 0 && fuckX < worldSize*chunkSize.x && fuckY >= 0 && fuckY < worldSize*chunkSize.y)
+						if (leafHeightMap[cX*chunkSize.x + (x + i)][cY*chunkSize.y + (y + j)] == 1)
+							foundTree = true;
+				}
+			}
+
+			if (!foundTree)
+			{
+				chunks[cX][cY]->blocks[x][y][0]->setBlock(BlockType::WOOD);
+				leafHeightMap[cX*chunkSize.x + x][cY*chunkSize.y + y] = 1;
+			}
+			else
+				treesNotGenerated++;
+		}
+	}
+
+	std::cout << "Trees not generated: " << treesNotGenerated << std::endl;
+
+	for (int cY = 0; cY < worldSize; cY++)
+	{
+		for (int cX = 0; cX < worldSize; cX++)
+		{
+			for (int y = 0; y < chunkSize.y; y++)
+			{
+				for (int x = 0; x < chunkSize.x; x++)
+				{ // begin
+					if (chunks[cX][cY]->blocks[x][y][0]->blockType == BlockType::WOOD)
+					{
+						/*
+						for (int i = 0; i < range; i++)
+						{
+							for (int j = 0; j < range; j++)
+							{
+								for (int l = 0; l < 8; ++l)
+								{
+									int ti = i + moves[l][0];
+									int tj = j + moves[l][1];
+									if (ti < 0 || ti >= range || tj < 0 || tj >= range)
+										continue;
+									// cell (ti, tj) is valid neighbor do something with it.
+									int fuckX = cX*chunkSize.x + (x + ti);
+									int fuckY = cY*chunkSize.y + (y + tj);
+									if (fuckX >= 0 && fuckX < worldSize*chunkSize.x && fuckY >= 0 && fuckY < worldSize*chunkSize.y)
+									{
+										leafHeightMap[cX*chunkSize.x + (x + ti)][cY*chunkSize.y + (y + tj)] = 1;
+									}
+								}
+							}
+						}*/
+						for (int i = -2; i <= 2; i++)
+						{
+							for (int j = -2; j <= 2; j++)
+							{
+								int fuckX = cX*chunkSize.x + (x + i);
+								int fuckY = cY*chunkSize.y + (y + j);
+								if (fuckX >= 0 && fuckX < worldSize*chunkSize.x && fuckY >= 0 && fuckY < worldSize*chunkSize.y)
+									leafHeightMap[cX*chunkSize.x + (x + i)][cY*chunkSize.y + (y + j)] = 1;
+							}
+						}
+
+						//kulmat pois
+						if(cX*chunkSize.x + x + 2 < worldSize*chunkSize.x && cY*chunkSize.y + y + 2 < worldSize*chunkSize.y)
+							leafHeightMap[cX*chunkSize.x + x + 2][cY*chunkSize.y + y + 2] = 0;
+
+						if (cX*chunkSize.x + x - 2 >= 0 && cY*chunkSize.y + y + 2 < worldSize*chunkSize.y)
+							leafHeightMap[cX*chunkSize.x + x - 2][cY*chunkSize.y + y + 2] = 0;
+
+						if (cX*chunkSize.x + x + 2 < worldSize*chunkSize.x && cY*chunkSize.y + y - 2 >= 0)
+							leafHeightMap[cX*chunkSize.x + x + 2][cY*chunkSize.y + y - 2] = 0;
+
+						if (cX*chunkSize.x + x - 2 >= 0 && cY*chunkSize.y + y - 2 >= 0)
+							leafHeightMap[cX*chunkSize.x + x - 2][cY*chunkSize.y + y - 2] = 0;
+
+					}
+				} //end
+			}
+		}
+	}
+
+	for (int cY = 0; cY < worldSize; cY++)
+	{
+		for (int cX = 0; cX < worldSize; cX++)
+		{
+			for (int y = 0; y < chunkSize.y; y++)
+			{
+				for (int x = 0; x < chunkSize.x; x++)
+				{
+					if (leafHeightMap[cX*chunkSize.x + x][cY*chunkSize.y + y] == 1)
+						if (chunks[cX][cY]->blocks[x][y] != nullptr)
+							this->chunks[cX][cY]->blocks[x][y][1]->setBlock(BlockType::LEAF);
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,31 @@
+NEXT UP (plans):
+-> lights
+	-> different colors (torches like in terraria)
+	-> bonfire, large light
+-> map previewer (render whole map on screen, pause game)
+	- previewer:
+		-> optimize by generating a texture of the map and rendering it
+		-> mouse callback
+		-> move map by dragging, zoom infinitely with wheel
+	- map:
+		-> water deeper areas darker
+TODO list:
+- own function for continuous key input, one for text-like input
+	-> everything else other than movement in text-like input ------------------------------ next?
+- large auto generated map
+	- random seed on every execution
+	- later:
+		- biomes: cellular noise / natural distance function
+		- buildings with random generated loot
+		- caves:
+			- new world? i guess
+- collision detection
+- monsters/enemies
+- text support
+- health system
+- inventory system
+- items
+- item functionality
+- ammo system?
+- ImGUI for FPS and testing
+- Python scripted command line commands

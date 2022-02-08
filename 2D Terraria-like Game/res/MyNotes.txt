@@ -1,0 +1,22 @@
+
+All performance boosting techniques will raise frame-rate:
+- view-frustum culling,
+- occlusion culling,
+- LOD,
+- early-Z/pre-Z/fast-Z (rendering order),
+- bindless (NV specific) or display lists,
+- instancing,
+- grouping by state,
+- etc. 
+
+world border rendering:
+- on edge of the world, render the other side of the map outwards, eg. if x(chunk) = 29, render chunk 1 and 2 to right.
+- when player crosses the border, teleport to other edge of the world. start rendering normally.
+
+world gen. previewer:
+- preview full map
+- code can be used for similar (mini)map that exists in e.g. PUBG, Rust...
+
+levels:
+[0] = all except...
+[1] = LEAF

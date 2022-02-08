@@ -1,0 +1,30 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Release\) contains files shared from another project (2D Terraria-like Game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Game.cpp
+  World.cpp
+src\engine\world\World.cpp(36): warning C4244: 'argument': conversion from 'int' to 'FN_DECIMAL', possible loss of data
+src\engine\world\World.cpp(70): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(71): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(76): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(77): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(99): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(100): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(112): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(113): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(124): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(125): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(127): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(128): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(129): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+src\engine\world\World.cpp(130): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+src\main.cpp(110): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+src\main.cpp(111): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  1 of 1080 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    46 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Henkka\Desktop\Työpöytä\C++ 2017-18\Projektit\2D Terraria-like Game\Release\vc120.pdb'; linking object as if no debug info
+  2D Terraria-like Game.vcxproj -> C:\Users\Henkka\Desktop\Työpöytä\C++ 2017-18\Projektit\2D Terraria-like Game\Release\2D Game Project.exe
+  2D Terraria-like Game.vcxproj -> C:\Users\Henkka\Desktop\Työpöytä\C++ 2017-18\Projektit\2D Terraria-like Game\Release\2D Game Project.pdb (Full PDB)
